@@ -49,7 +49,7 @@ class Email
     $comment = 'Test comment';
 
     //send email
-    $this->phpMail($admin_email, "$subject", $comment, "From:" . $email);
+    $this->phpMail($email, $admin_email, "$subject", $comment);
 
     $this->logMail();
   }
@@ -84,7 +84,7 @@ class Email
    *
    * Send the email
    */
-  private function phpMail($email, $subject, $comment, $from) {
-    mail($email, $subject, $comment, $from);
+  private function phpMail($to, $from, $subject, $comment) {
+    mail($to, $subject, $comment, "From:" . $from);
   }
 }
