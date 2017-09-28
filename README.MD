@@ -13,5 +13,6 @@ All tests passing, all ensuring maximum coverage
 
 ### PHP Unit commands
 
-phpunit --bootstrap email.php email.test.php
-phpunit --bootstrap remoteConnect.php remoteConnect.test.php
+`phpunit --bootstrap email.php email.test.php`
+
+`phpunit --bootstrap remoteConnect.php remoteConnect.test.php`
