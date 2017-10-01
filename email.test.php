@@ -13,15 +13,23 @@ class EmailTest extends TestCase
    */
   public function testCanBeCreatedFromValidEmailAddress()
   {
-
+    $emailStr = "mike.reed.vallejo@gmail.com";
+    
+    $emailClassObj = new Email($emailStr);
+    $this->assertInstanceOf("Email", $emailClassObj);
   }
 
   /**
    * Will this email class fail to be instantiated with an invalid email address?
    */
+  /**
+   * @expectedException InvalidArgumentException
+   */
   public function testCannotBeCreatedFromInvalidEmailAddress()
   {
-
+    $emailStr = "This-is-an-invalid-email-string";
+    
+    $emailClassObj = new Email($emailStr);
   }
 
   /**
@@ -29,7 +37,11 @@ class EmailTest extends TestCase
    */
   public function testCanBeUsedAsString()
   {
-
+    $emailStr = "mike.reed.vallejo@gmail.com";
+    
+    $emailClassObj = new Email($emailStr);
+    $result = $emailClassObj->fromString($emailStr);
+    $this->assertTrue($emailStr == $result);
   }
 
   /**
@@ -37,6 +49,20 @@ class EmailTest extends TestCase
    * that we can override the log function. Logging the mail exits the application so we need to bypass that.
    */
   public function testEmailSend() {
+    $emailStr = "mike.reed.vallejo@gmail.com";
+
+    $emailMock = $this->getMockBuilder("Email")
+      ->setConstructorArgs(array($emailStr))
+      ->setMethods(array("logMail","phpMail"))
+      ->getMock();
+
+    $emailMock->expects($this->once())
+      ->method("logMail");
+    $emailMock->expects($this->once())
+      ->method("phpMail");
+
+    $emailMock->sendEmail();
 
   }
+
 }
