@@ -84,7 +84,7 @@ class Email
    *
    * Send the email
    */
-  private function phpMail($to, $from, $subject, $comment) {
+  protected function phpMail($to, $from, $subject, $comment) {
     mail($to, $subject, $comment, "From:" . $from);
   }
 }
